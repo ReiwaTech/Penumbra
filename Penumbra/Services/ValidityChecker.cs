@@ -52,7 +52,7 @@ public class ValidityChecker : IService
     // Because remnants of penumbra in devPlugins cause issues, we check for them to warn users to remove them.
     private static bool CheckDevPluginPenumbra(IDalamudPluginInterface pi)
     {
-#if !DEBUG
+#if FALSE
         var path = Path.Combine(pi.DalamudAssetDirectory.Parent?.FullName ?? "INVALIDPATH", "devPlugins", "Penumbra");
         var dir  = new DirectoryInfo(path);
 
@@ -73,7 +73,7 @@ public class ValidityChecker : IService
     // Check if the loaded version of Penumbra itself is in devPlugins.
     private static bool CheckIsNotInstalled(IDalamudPluginInterface pi)
     {
-#if !DEBUG
+#if FALSE
         var checkedDirectory = pi.AssemblyLocation.Directory?.Parent?.Parent?.Name;
         var ret              = checkedDirectory?.Equals("installedPlugins", StringComparison.OrdinalIgnoreCase) ?? false;
         if (!ret)
@@ -88,7 +88,7 @@ public class ValidityChecker : IService
     // Check if the loaded version of Penumbra is installed from a valid source repo.
     private static bool CheckSourceRepo(IDalamudPluginInterface pi)
     {
-#if !DEBUG
+#if FALSE
         return pi.SourceRepository?.Trim().ToLowerInvariant() switch
         {
             null            => false,
